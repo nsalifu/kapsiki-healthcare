@@ -1,17 +1,31 @@
 services:
-  gateway:
-    container_name: proxy
+  certbot:
+    image: certbot/certbot
+    container_name: openmrs-certbot
+    volumes:
+      - ./nginx/certs/demo.healthcare.kapsiki.net:/etc/letsencrypt
+      - ./nginx/certs/demo.healthcare.kapsiki.net:/var/lib/letsencrypt
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+  proxy:
     image: openmrs/openmrs-reference-application-3-gateway:${TAG:-qa}
+    container_name: openmrs-proxy
     restart: "unless-stopped"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/certs/demo.healthcare.kapsiki.net/fullchain.pem:/etc/nginx/certs/demo.healthcare.kapsiki.net/fullchain.pem
+      - ./nginx/certs/demo.healthcare.kapsiki.net/privkey.pem:/etc/nginx/keys/demo.healthcare.kapsiki.net/privkey.pem
     depends_on:
       - frontend
       - backend
+      - certbot
     ports:
       - "80:80"
+      - "443:443"
 
   frontend:
-    container_name: frontend
-    image: openmrs/openmrs-reference-application-3-frontend:${TAG:-qa}
+    image: kapsiki/kapsiki-openmrs-frontend:latest
+    container_name: openmrs-frontend
     restart: "unless-stopped"
     environment:
       SPA_PATH: /openmrs/spa
@@ -25,8 +39,8 @@ services:
       - backend
 
   backend:
-    container_name: backend
-    image: openmrs/openmrs-reference-application-3-backend:${TAG:-qa}
+    image: kapsiki/kapsiki-openmrs-backend:latest
+    container_name: openmrs-backend
     restart: "unless-stopped"
     depends_on:
       - db
@@ -45,8 +59,8 @@ services:
       - openmrs-data:/openmrs/data
 
   db:
-    container_name: database
     image: mysql:8.2.0  # Use a stable version of MySQL
+    container_name: openmrs-db
     restart: "unless-stopped"
     command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci"
     ports:
@@ -60,10 +74,11 @@ services:
       MYSQL_DATABASE: openmrs
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
     volumes:
-      - db-data:/var/lib/mysql
-     # - ./my.cnf:/etc/my.cnf  # Ensure this file exists
+      # - db-data:/var/lib/mysql
+      - /home/openmrs/deploy/mysql_volume_db:/var/lib/mysql
+      - /home/openmrs/deploy/my.cnf:/etc/my.cnf  # Ensure this file exists
 
 volumes:
   openmrs-data: ~
-  db-data: ~
-  
+  #db-data: ~
+  #mysql_volume:

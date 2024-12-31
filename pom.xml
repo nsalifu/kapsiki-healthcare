@@ -9,22 +9,19 @@
   <packaging>pom</packaging>
 
   <organization>
-    <name>OpenMRS Inc.</name>
-    <url>https://openmrs.org</url>
+    <name>kapsiki.net</name>
+    <url>https://kapsiki.net</url>
   </organization>
 
   <scm>
-    <connection>scm:git:git@github.com:openmrs/openmrs-distro-referenceapplication.git</connection>
-    <developerConnection>scm:git:git@github.com:openmrs/openmrs-distro-referenceapplication.git</developerConnection>
+    <connection>scm:git:git@github.com:kapsiki/kapsiki-distro-referenceapplication.git</connection>
+    <developerConnection>scm:git:git@github.com:kapsiki/kapsiki-distro-referenceapplication.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
   <developers>
     <developer>
-      <name>Romain Buisson</name>
-    </developer>
-    <developer>
-      <name>Ian Bacher</name>
+      <name>Kouete Digital Solutions GmbH</name>
     </developer>
   </developers>
 
