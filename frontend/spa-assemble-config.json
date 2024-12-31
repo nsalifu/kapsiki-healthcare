@@ -14,7 +14,6 @@
     "@openmrs/esm-home-app": "next",
     "@openmrs/esm-implementer-tools-app": "next",
     "@openmrs/esm-laboratory-app": "next",
-    "@openmrs/esm-login-app": "next",
     "@openmrs/esm-openconceptlab-app": "next",
     "@openmrs/esm-patient-allergies-app": "next",
     "@openmrs/esm-patient-attachments-app": "next",
@@ -34,13 +33,31 @@
     "@openmrs/esm-patient-search-app": "next",
     "@openmrs/esm-patient-tests-app": "next",
     "@openmrs/esm-patient-vitals-app": "next",
-    "@openmrs/esm-primary-navigation-app": "next",
     "@openmrs/esm-service-queues-app": "next",
     "@openmrs/esm-system-admin-app": "next",
     "@openmrs/esm-user-onboarding-app": "next",
     "@openmrs/esm-ward-app": "next",
     "@openmrs/esm-stock-management-app": "next",
-    "@openmrs/esm-billing-app": "next"
+    "@openmrs/esm-billing-app": "next",
+    "@kapsiki/esm-primary-navigation-app": "latest",
+    "@kapsiki/esm-login-app": "latest",
+    "@kapsiki/esm-footer-app": "latest",
+    "@openmrs/esm-radiology-app": "latest",
+    "@kapsiki/esm-styleguide-app": "latest"
+  },
+  "@openmrs/esm-bed-management-app": {
+    "admissionLocationTagUuid": "9597ff62-7683-43bf-8f85-ad5a4bb936c8"
+  },
+  "@openmrs/esm-styleguide": {
+    "Brand color #1": "#FFFF",
+    "Brand color #2": "#A0A0A1", 
+    "Brand color #3": "#0CAE50"
+  },
+  "@openmrs/esm-patient-chart-app": {
+    "logo": {
+      "src": "/openmrs/spa/kapsiki-esm-styleguide-app-0.1.0/css/kapsiki-healthcare-logo.svg",
+      "name": "Kapsiki Healthcare"
+    }
   },
   "excludedFrontendModules": []
 }
